@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://dev-path-ai.onrender.com',
   withCredentials: true, // Sends HTTP-Only cookies automatically
   headers: {
     'Content-Type': 'application/json'
