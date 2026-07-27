@@ -2,9 +2,6 @@
 -- DevPath AI - Production Database Schema Design
 -- ===================================================
 
-CREATE DATABASE IF NOT EXISTS devpath_ai;
-USE devpath_ai;
-
 -- 1. USERS TABLE
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
