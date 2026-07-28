@@ -20,9 +20,15 @@ const LoginPage = () => {
 
     try {
       const res = await authAPI.login({ email, password });
-      if (res.data && res.data.success) {
-        loginUser(res.data.user);
-        navigate('/dashboard');
+
+if (res.data && res.data.success) {
+  // Save access token
+  localStorage.setItem("accessToken", res.data.accessToken);
+
+  loginUser(res.data.user);
+
+  navigate('/dashboard');
+
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please check your credentials.');

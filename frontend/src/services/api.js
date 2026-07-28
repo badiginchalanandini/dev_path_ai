@@ -7,7 +7,18 @@ const API = axios.create({
     'Content-Type': 'application/json'
   }
 });
+API.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("accessToken");
 
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 // Axios Response Interceptor for automatic 401 Refresh Token renewal
 API.interceptors.response.use(
   (response) => response,
@@ -22,8 +33,18 @@ API.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        await axios.post('http://localhost:5000/api/auth/refresh-token', {}, { withCredentials: true });
-        return API(originalRequest);
+        const refreshRes = await axios.post(
+    "https://dev-path-ai.onrender.com/api/auth/refresh-token",
+    {},
+    { withCredentials: true }
+);
+
+localStorage.setItem(
+    "accessToken",
+    refreshRes.data.accessToken
+);
+
+return API(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }
