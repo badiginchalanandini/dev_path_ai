@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Loading from './components/Loading';
 
 // Pages
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
@@ -35,36 +36,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// Home Landing Component
-const HomeLanding = () => {
-  const { user } = useAuth();
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  return (
-    <div className="app-container">
-      <section className="hero-banner">
-        <span className="hero-tag">🎓 Internship-Ready Career Platform</span>
-        <h1 className="hero-title">
-          Plan Your Career. <br /> Build Amazing Projects. Get Internship Ready.
-        </h1>
-        <p className="hero-subtitle">
-          DevPath AI matches your education details, skills, and target roles to construct custom career roadmaps, skill gap reports, weekly timetables, flagship project blueprints, and interview prep.
-        </p>
-
-        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/signup" className="btn btn-primary" style={{ padding: '14px 32px', fontSize: '1.05rem' }}>
-            ⚡ Get Started Free
-          </a>
-          <a href="/login" className="btn btn-outline" style={{ padding: '14px 32px', fontSize: '1.05rem' }}>
-            🔑 Sign In
-          </a>
-        </div>
-      </section>
-    </div>
-  );
-};
 
 function App() {
   return (
@@ -75,7 +46,7 @@ function App() {
 
           <div style={{ flex: 1 }} className="app-container">
             <Routes>
-              <Route path="/" element={<HomeLanding />} />
+              <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
 
